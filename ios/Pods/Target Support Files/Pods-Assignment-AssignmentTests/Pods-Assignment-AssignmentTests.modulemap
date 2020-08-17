@@ -1,0 +1,6 @@
+module Pods_Assignment_AssignmentTests {
+  umbrella header "Pods-Assignment-AssignmentTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
