@@ -10,19 +10,13 @@ import React from 'react';
 import {
   SafeAreaView,
   StyleSheet,
-  ScrollView,
   View,
   Text,
-  StatusBar,
-  FlatList,
+  FlatList
 } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default class HomeScreen extends React.Component{
-//   constructor(){
-//     super();
-//   this.page = 0
-// }
   state={
     hits:[],
     page:0
@@ -32,22 +26,11 @@ export default class HomeScreen extends React.Component{
 
     .then((response) => response.json())
     .then((json) => {
-      // console.log( json.hits);
-      var data= this.state.hits.concat(json.hits)
-      if (json.hits !== ''){
-// this.setState({
-  // hits:json.hits
-  // hits: [ ...this.state.hits, json.hits]
-  // this.setState(prevState => ({ hits: [...prevState.hits, json.hits] }))
-  this.setState({hits:data})
-
-  // hits: this.state.hits.concat(json.hits)
-
-// })
-this.setState({
-  page: (this.state.page) + 1
-})
-      }
+      var data2 = this.state.hits.concat(json.hits)
+    this.setState({
+      hits:data2,
+      page: (this.state.page) + 1
+    })
     })
     .catch((error) => {
       console.error(error);
@@ -63,25 +46,22 @@ this.setState({
     }
     
   render(){
-    // renderHits = this.state.hits.map(hit=>{
     if(this.state.hits.length>0){
     return(
       <SafeAreaView style={styles.container}>
       <FlatList
-      keyExtractor={(items)=> items.objectID}
-
+      keyExtractor={(items,index)=> index.toString()}
       data={this.state.hits}
-      renderItem={({item})=>{
+      renderItem={(items)=>{
         return( 
           <TouchableOpacity onPress={()=>this.props.navigation.navigate('Detail',{
-            hitDetail:item
+            hitDetail:items
           })}>
-           {/* // {console.log(items)} */}
           <View style={styles.textViewStyle}>
-          <Text style={{fontWeight:"bold"}}>{item.title}</Text>
-          <Text>URL: {item.url}</Text>
-          <Text>Author: {item.author}</Text>
-          <Text>Created Date: {item.created_at}</Text>
+          <Text style={{fontWeight:"bold"}}>{items.item.title}</Text>
+          <Text>URL: {items.item.url}</Text>
+          <Text>Author: {items.item.author}</Text>
+          <Text>Created Date: {items.item.created_at}</Text>
           </View>
           </TouchableOpacity>
           )

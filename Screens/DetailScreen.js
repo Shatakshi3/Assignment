@@ -10,23 +10,20 @@ import React from 'react';
 import {
   SafeAreaView,
   StyleSheet,
-  ScrollView,
-  View,
   Text,
-  StatusBar,
-  FlatList,
+  View
 } from 'react-native';
 
 export default class DetailScreen extends React.Component{
 
   render(){
-    // renderHits = this.state.hits.map(hit=>{
  const { hitDetail } = this.props.route.params;
 
     return(
       <SafeAreaView style={styles.container}>
-          <Text> {JSON.stringify(hitDetail)}</Text>
-
+        <View style={{margin:10, backgroundColor:'white', borderWidth:0.5, padding:10}}>
+          <Text>{JSON.stringify(hitDetail)}</Text>
+        </View>
       </SafeAreaView>
     )
   }
@@ -36,6 +33,7 @@ const styles = StyleSheet.create({
     container:{
         flex:1,
         backgroundColor:'#ffcba4',
+        alignContent:'center'
     }
 });
 
